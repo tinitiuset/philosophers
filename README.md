@@ -1,1 +1,1 @@
-# Philosophers ![norminette](https://github.com/tinitiuset/Philosophers/workflows/norminette/badge.svg)
+# Philosophers ![norminette](https://github.com/tinitiuset/philosophers/workflows/norminette/badge.svg)
