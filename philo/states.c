@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <philo.h>
+#include "philo.h"
 
 /*
  * Usage: nofity_state(philo, fork | eat | think | die);
