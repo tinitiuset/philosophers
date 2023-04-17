@@ -6,13 +6,13 @@
 /*   By: mvalient <mvalient@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:38:32 by mvalient          #+#    #+#             */
-/*   Updated: 2023/04/17 19:55:54 by mvalient         ###   ########.fr       */
+/*   Updated: 2023/04/17 19:56:09 by mvalient         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-t_philo *create_philo_list(int num)
+t_philo	*create_philo_list(int num)
 {
 	t_philo	*head;
 	t_philo	*tmp;
@@ -33,7 +33,7 @@ t_philo *create_philo_list(int num)
 	return (head);
 }
 
-t_fork *create_fork_list(int num)
+t_fork	*create_fork_list(int num)
 {
 	t_fork	*head;
 	t_fork	*tmp;

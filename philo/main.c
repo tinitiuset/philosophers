@@ -6,7 +6,7 @@
 /*   By: mvalient <mvalient@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 19:46:16 by mvalient          #+#    #+#             */
-/*   Updated: 2023/04/17 19:41:24 by mvalient         ###   ########.fr       */
+/*   Updated: 2023/04/17 19:54:21 by mvalient         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 int	main(int argc, char **argv)
 {
 	t_stats		stats;
-	t_philo 	*philo_list;
-	t_fork 		*fork_list;
+	t_philo		*philo_list;
+	t_fork		*fork_list;
 
 	if (argc < 5 || argc > 6)
 		return (1);
