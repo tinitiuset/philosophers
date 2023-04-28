@@ -21,7 +21,7 @@ SRC_OBJS = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(SRC_OBJS)
-	@$(CC) $(CFLAGS) $(SRC_OBJS) -o $(NAME)
+	$(CC) $(CFLAGS) $(SRC_OBJS) -o $(NAME)
 	@echo "$$HEADER"
 	@echo "philo Compiled"
 
