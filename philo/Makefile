@@ -11,10 +11,11 @@ endef
 export HEADER
 
 CC = gcc
-CFLAGS = -g
+CFLAGS = -g -pthread
 
 SRC =	main.c	lists.c \
-		ft_atoi.c	philo.c
+		ft_atoi.c	philo.c \
+		time_utils.c
 
 SRC_OBJS = $(SRC:.c=.o)
 

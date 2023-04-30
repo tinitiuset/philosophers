@@ -6,7 +6,7 @@
 /*   By: mvalient <mvalient@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 19:51:38 by mvalient          #+#    #+#             */
-/*   Updated: 2023/04/28 17:30:53 by mvalient         ###   ########.fr       */
+/*   Updated: 2023/04/30 20:02:46 by mvalient         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <pthread.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <sys/time.h>
+# include <unistd.h>
 
 typedef struct s_stats
 {
@@ -40,6 +42,14 @@ typedef struct s_philo
 	struct s_philo	*next;
 }			t_philo;
 
+typedef struct s_p_data
+{
+	t_stats	*stat;
+	t_philo	*philo;
+	t_fork	*l_fork;
+	t_fork	*r_fork;
+}			t_p_data;
+
 typedef struct s_data
 {
 	t_stats	*stat;
@@ -48,8 +58,9 @@ typedef struct s_data
 }			t_data;
 
 int		ft_atoi(const char *nptr);
-t_philo	*create_philo_list(int number_philo);
-t_fork	*create_fork_list(int number_philo);
-void	*philosopher(void *attr);
+t_philo	*ft_create_philo_list(int number_philo);
+t_fork	*ft_create_fork_list(int number_philo);
+void	*ft_philosopher(void *attr);
+long	ft_date(void);
 
 #endif

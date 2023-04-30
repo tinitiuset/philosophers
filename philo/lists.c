@@ -12,7 +12,7 @@
 
 #include "philo.h"
 
-t_philo	*create_philo_list(int num)
+t_philo	*ft_create_philo_list(int num)
 {
 	t_philo	*head;
 	t_philo	*tmp;
@@ -23,7 +23,7 @@ t_philo	*create_philo_list(int num)
 	head->index = i;
 	head->next = NULL;
 	tmp = head;
-	while (++i <= num)
+	while (++i <= number_philo)
 	{
 		tmp->next = malloc(sizeof(t_philo));
 		tmp = tmp->next;
@@ -33,7 +33,7 @@ t_philo	*create_philo_list(int num)
 	return (head);
 }
 
-t_fork	*create_fork_list(int num)
+t_fork	*ft_create_fork_list(int num)
 {
 	t_fork	*head;
 	t_fork	*tmp;
@@ -45,7 +45,7 @@ t_fork	*create_fork_list(int num)
 	pthread_mutex_init(&head->on_use, NULL);
 	head->next = NULL;
 	tmp = head;
-	while (++i <= num)
+	while (++i <= number_philo)
 	{
 		tmp->next = malloc(sizeof(t_fork));
 		tmp = tmp->next;
