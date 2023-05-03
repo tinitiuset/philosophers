@@ -6,7 +6,7 @@
 /*   By: mvalient <mvalient@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 15:01:51 by mvalient          #+#    #+#             */
-/*   Updated: 2023/05/03 19:46:49 by mvalient         ###   ########.fr       */
+/*   Updated: 2023/05/03 19:57:04 by mvalient         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,5 @@ void	*ft_philosopher(void *attr)
 	if (alive)
 		pthread_exit(0);
 	else
-		pthread_exit((void *) (long) p_data->philo->index);
+		pthread_exit((void *)(long)p_data->philo->index);
 }
