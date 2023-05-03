@@ -6,13 +6,13 @@
 /*   By: mvalient <mvalient@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 19:46:16 by mvalient          #+#    #+#             */
-/*   Updated: 2023/05/03 19:26:04 by mvalient         ###   ########.fr       */
+/*   Updated: 2023/05/03 19:46:49 by mvalient         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ft_clear_data(t_data *data)
+static void	ft_clear_data(t_data *data)
 {
 	t_philo	*temp_philo;
 	t_fork	*temp_fork;
@@ -33,7 +33,7 @@ void	ft_clear_data(t_data *data)
 	free(data);
 }
 
-void	ft_select_forks(t_data *data, t_p_data *pdata)
+static void	ft_select_forks(t_data *data, t_p_data *pdata)
 {
 	t_fork	*temp_fork;
 
@@ -50,7 +50,7 @@ void	ft_select_forks(t_data *data, t_p_data *pdata)
 		pdata->r_fork = data->fork;
 }
 
-void	ft_wait_philo(t_data *data)
+static void	ft_wait_philo(t_data *data)
 {
 	t_philo	*temp_philo;
 	void	*ret;
@@ -64,10 +64,10 @@ void	ft_wait_philo(t_data *data)
 	if (ret == NULL)
 		printf("All philosophers have eaten \n");
 	else
-		printf("Philosopher %d died\n", (int)ret);
+		printf("Philosopher %ld died\n", (long) ret);
 }
 
-void	ft_wake_philo(t_data *data)
+static void	ft_wake_philo(t_data *data)
 {
 	t_philo		*temp_philo;
 	t_p_data	*p_data;
