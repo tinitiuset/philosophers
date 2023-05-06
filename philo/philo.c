@@ -6,7 +6,7 @@
 /*   By: mvalient <mvalient@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 15:01:51 by mvalient          #+#    #+#             */
-/*   Updated: 2023/05/06 22:56:09 by mvalient         ###   ########.fr       */
+/*   Updated: 2023/05/06 23:43:48 by mvalient         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,24 +33,38 @@ void	ft_sleep(t_p_data *data)
 
 static int	ft_try_eat(t_p_data *data)
 {
+	while (!is_dead(data->philo->last_meal, ft_date(), data->stat->time_die))
+	{
+		if (!data->l_fork->used)
+		{
+			pthread_mutex_lock(&data->l_fork->mutex);
+			data->l_fork->used = true;
+			printf("%ld Philosopher %d has taken a fork\n",
+				   ft_date_diff(data->stat->start_time), data->philo->index);
+			break ;
+		}
+	}
+	while (!is_dead(data->philo->last_meal, ft_date(), data->stat->time_die))
+	{
+		if (!data->r_fork->used)
+		{
+			pthread_mutex_lock(&data->r_fork->mutex);
+			data->r_fork->used = true;
+			printf("%ld Philosopher %d has taken a fork\n",
+				   ft_date_diff(data->stat->start_time), data->philo->index);
+			break ;
+		}
+	}
 	if (is_dead(data->philo->last_meal, ft_date(), data->stat->time_die))
 		return (0);
-	pthread_mutex_lock(&data->l_fork->on_use);
-	if (is_dead(data->philo->last_meal, ft_date(), data->stat->time_die) || data->stat->dead)
-		return (0);
-	printf("%ld Philosopher %d has taken a fork\n",
-		   ft_date_diff(data->stat->start_time), data->philo->index);
-	pthread_mutex_lock(&data->r_fork->on_use);
-	if (is_dead(data->philo->last_meal, ft_date(), data->stat->time_die) || data->stat->dead)
-		return (0);
-	printf("%ld Philosopher %d has taken a fork\n",
-		   ft_date_diff(data->stat->start_time), data->philo->index);
 	data->philo->last_meal = ft_date();
 	printf("%ld Philosopher %d is eating\n",
 		   ft_date_diff(data->stat->start_time), data->philo->index);
 	ft_usleep(data->stat->time_eat);
-	pthread_mutex_unlock(&data->l_fork->on_use);
-	pthread_mutex_unlock(&data->r_fork->on_use);
+	data->l_fork->used = false;
+	data->r_fork->used = false;
+	pthread_mutex_unlock(&data->l_fork->mutex);
+	pthread_mutex_unlock(&data->r_fork->mutex);
 	return (1);
 }
 

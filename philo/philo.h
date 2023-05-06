@@ -6,7 +6,7 @@
 /*   By: mvalient <mvalient@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 19:51:38 by mvalient          #+#    #+#             */
-/*   Updated: 2023/05/06 11:57:42 by mvalient         ###   ########.fr       */
+/*   Updated: 2023/05/06 13:14:33 by mvalient         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ typedef struct s_stats
 typedef struct s_fork
 {
 	int				index;
-	pthread_mutex_t	on_use;
+	bool			used;
+	pthread_mutex_t	mutex;
 	struct s_fork	*next;
 }			t_fork;
 

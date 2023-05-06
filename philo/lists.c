@@ -42,7 +42,7 @@ t_fork	*ft_create_fork_list(int num)
 	i = 1;
 	head = malloc(sizeof(t_fork));
 	head->index = i;
-	pthread_mutex_init(&head->on_use, NULL);
+	pthread_mutex_init(&head->mutex, NULL);
 	head->next = NULL;
 	tmp = head;
 	while (++i <= num)
@@ -51,7 +51,7 @@ t_fork	*ft_create_fork_list(int num)
 		memset(tmp->next, 0, sizeof(t_fork));
 		tmp = tmp->next;
 		tmp->index = i;
-		pthread_mutex_init(&head->on_use, NULL);
+		pthread_mutex_init(&head->mutex, NULL);
 		tmp->next = NULL;
 	}
 	return (head);
