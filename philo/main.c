@@ -6,7 +6,7 @@
 /*   By: mvalient <mvalient@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 19:46:16 by mvalient          #+#    #+#             */
-/*   Updated: 2023/05/03 19:46:49 by mvalient         ###   ########.fr       */
+/*   Updated: 2023/05/06 12:00:28 by mvalient         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ static void	ft_clear_data(t_data *data)
 	while (data->philo != NULL)
 	{
 		temp_philo = data->philo->next;
-		free(data->philo);
+		//free(data->philo);
 		data->philo = temp_philo;
 	}
 	while (data->fork != NULL)
 	{
 		temp_fork = data->fork->next;
-		free(data->fork);
+		//free(data->fork);
 		data->fork = temp_fork;
 	}
 	free(data->stat);
@@ -64,7 +64,7 @@ static void	ft_wait_philo(t_data *data)
 	if (ret == NULL)
 		printf("All philosophers have eaten \n");
 	else
-		printf("Philosopher %ld died\n", (long) ret);
+		printf("Simulation ended");
 }
 
 static void	ft_wake_philo(t_data *data)
@@ -72,6 +72,7 @@ static void	ft_wake_philo(t_data *data)
 	t_philo		*temp_philo;
 	t_p_data	*p_data;
 
+	data->stat->start_time = ft_date();
 	temp_philo = data->philo;
 	while (temp_philo)
 	{
@@ -97,6 +98,8 @@ int	main(int argc, char **argv)
 	data->stat->time_die = ft_atoi(argv[2]);
 	data->stat->time_eat = ft_atoi(argv[3]);
 	data->stat->time_sleep = ft_atoi(argv[4]);
+	data->stat->start_time = ft_date();
+	data->stat->dead = false;
 	if (argc == 6)
 		data->stat->must_eat = ft_atoi(argv[5]);
 	else
