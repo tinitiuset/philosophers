@@ -6,7 +6,7 @@
 /*   By: mvalient <mvalient@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 19:51:38 by mvalient          #+#    #+#             */
-/*   Updated: 2023/05/07 09:38:44 by mvalient         ###   ########.fr       */
+/*   Updated: 2023/05/07 11:22:40 by mvalient         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,54 +21,54 @@
 # include <memory.h>
 # include <stdbool.h>
 
-typedef struct s_stats
+typedef struct s_s
 {
-	int		number_philo;
-	int		time_die;
-	int		time_eat;
-	int		time_sleep;
-	int		must_eat;
-	long	start_time;
-	bool	dead;
-}			t_stats;
+	int		n;
+	int		d;
+	int		e;
+	int		s;
+	int		m;
+	long	t;
+	bool	dd;
+}			t_s;
 
-typedef struct s_fork
+typedef struct s_f
 {
-	int				index;
-	bool			used;
-	pthread_mutex_t	mutex;
-	struct s_fork	*next;
-}			t_fork;
+	int				i;
+	bool			u;
+	pthread_mutex_t	m;
+	struct s_f		*n;
+}			t_f;
 
-typedef struct s_philo
+typedef struct s_p
 {
-	int				index;
-	pthread_t		thread;
-	struct s_philo	*next;
-	long			last_meal;
-}			t_philo;
+	int				i;
+	pthread_t		t;
+	struct s_p		*n;
+	long			l;
+}			t_p;
 
-typedef struct s_p_data
+typedef struct s_p_d
 {
-	t_stats	*stat;
-	t_philo	*philo;
-	t_fork	*l_fork;
-	t_fork	*r_fork;
-}			t_p_data;
+	t_s	*s;
+	t_p	*p;
+	t_f	*l;
+	t_f	*r;
+}			t_p_d;
 
-typedef struct s_data
+typedef struct s_d
 {
-	t_stats	*stat;
-	t_philo	*philo;
-	t_fork	*fork;
-}			t_data;
+	t_s	*s;
+	t_p	*p;
+	t_f	*f;
+}			t_d;
 
 int		ft_atoi(const char *nptr);
-t_philo	*ft_create_philo_list(int number_philo);
-t_fork	*ft_create_fork_list(int number_philo);
+t_p		*ft_create_philo_list(int number_philo);
+t_f		*ft_create_fork_list(int number_philo);
 void	*ft_philosopher(void *attr);
 long	ft_date(void);
-long	ft_date_diff(long date);
+long	ft_d_d(long date);
 void	ft_usleep(long int time_in_ms);
 int		is_dead(long last_meal, long now, int time_to_die);
 

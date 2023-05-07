@@ -6,7 +6,7 @@
 /*   By: mvalient <mvalient@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 18:53:24 by mvalient          #+#    #+#             */
-/*   Updated: 2023/05/07 09:42:13 by mvalient         ###   ########.fr       */
+/*   Updated: 2023/05/07 10:24:15 by mvalient         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ long	ft_date(void)
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
 
-long	ft_date_diff(long date)
+long	ft_d_d(long date)
 {
 	return (ft_date() - date);
 }
