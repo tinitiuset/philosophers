@@ -6,7 +6,7 @@
 /*   By: mvalient <mvalient@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 18:53:24 by mvalient          #+#    #+#             */
-/*   Updated: 2023/04/30 19:02:54 by mvalient         ###   ########.fr       */
+/*   Updated: 2023/05/07 09:42:13 by mvalient         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,14 @@ void	ft_usleep(long int time_in_ms)
 {
 	long int	start_time;
 
-	start_time = 0;
 	start_time = ft_date();
 	while ((ft_date() - start_time) < time_in_ms)
 		usleep(100);
+}
+
+int	is_dead(long last_meal, long now, int time_to_die)
+{
+	if ((now - last_meal) > time_to_die)
+		return (1);
+	return (0);
 }

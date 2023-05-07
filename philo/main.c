@@ -6,7 +6,7 @@
 /*   By: mvalient <mvalient@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 19:46:16 by mvalient          #+#    #+#             */
-/*   Updated: 2023/05/06 12:00:28 by mvalient         ###   ########.fr       */
+/*   Updated: 2023/05/07 11:08:49 by mvalient         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,7 @@ static void	ft_wait_philo(t_data *data)
 		pthread_join(temp_philo->thread, &ret);
 		temp_philo = temp_philo->next;
 	}
-	if (ret == NULL)
-		printf("All philosophers have eaten \n");
-	else
-		printf("Simulation ended");
+	printf("Simulation ended");
 }
 
 static void	ft_wake_philo(t_data *data)
@@ -80,6 +77,7 @@ static void	ft_wake_philo(t_data *data)
 		memset(p_data, 0, sizeof(t_p_data));
 		p_data->stat = data->stat;
 		p_data->philo = temp_philo;
+		p_data->philo->last_meal = p_data->stat->start_time;
 		ft_select_forks(data, p_data);
 		pthread_create(&temp_philo->thread, NULL, ft_philosopher, p_data);
 		temp_philo = temp_philo->next;

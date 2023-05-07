@@ -6,7 +6,7 @@
 /*   By: mvalient <mvalient@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 19:51:38 by mvalient          #+#    #+#             */
-/*   Updated: 2023/05/06 13:14:33 by mvalient         ###   ########.fr       */
+/*   Updated: 2023/05/07 09:38:44 by mvalient         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <sys/time.h>
 # include <unistd.h>
 # include <memory.h>
-#include <stdbool.h>
+# include <stdbool.h>
 
 typedef struct s_stats
 {
@@ -70,5 +70,6 @@ void	*ft_philosopher(void *attr);
 long	ft_date(void);
 long	ft_date_diff(long date);
 void	ft_usleep(long int time_in_ms);
+int		is_dead(long last_meal, long now, int time_to_die);
 
 #endif
