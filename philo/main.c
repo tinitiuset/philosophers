@@ -20,13 +20,13 @@ static void	ft_clear_data(t_data *data)
 	while (data->philo != NULL)
 	{
 		temp_philo = data->philo->next;
-		//free(data->philo);
+		free(data->philo);
 		data->philo = temp_philo;
 	}
 	while (data->fork != NULL)
 	{
 		temp_fork = data->fork->next;
-		//free(data->fork);
+		free(data->fork);
 		data->fork = temp_fork;
 	}
 	free(data->stat);
