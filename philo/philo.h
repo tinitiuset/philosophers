@@ -27,8 +27,8 @@ typedef struct s_stats
 	int		time_die;
 	int		time_eat;
 	int		time_sleep;
-	int		must_eat;
-	long	start_time;
+	int		m;
+	long	s;
 	bool	dead;
 }			t_stats;
 
@@ -42,7 +42,7 @@ typedef struct s_fork
 
 typedef struct s_philo
 {
-	int				index;
+	int				i;
 	pthread_t		thread;
 	struct s_philo	*next;
 	long			last_meal;
@@ -50,8 +50,8 @@ typedef struct s_philo
 
 typedef struct s_p_data
 {
-	t_stats	*stat;
-	t_philo	*philo;
+	t_stats	*s;
+	t_philo	*p;
 	t_fork	*l_fork;
 	t_fork	*r_fork;
 }			t_p_data;
@@ -68,7 +68,7 @@ t_philo	*ft_create_philo_list(int number_philo);
 t_fork	*ft_create_fork_list(int number_philo);
 void	*ft_philosopher(void *attr);
 long	ft_date(void);
-long	ft_date_diff(long date);
+long	ft_dd(long date);
 void	ft_usleep(long int time_in_ms);
 int		is_dead(long last_meal, long now, int time_to_die);
 

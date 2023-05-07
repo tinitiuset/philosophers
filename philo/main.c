@@ -40,9 +40,9 @@ static void	ft_select_forks(t_data *data, t_p_data *pdata)
 	temp_fork = data->fork;
 	while (temp_fork)
 	{
-		if (temp_fork->index == pdata->philo->index)
+		if (temp_fork->index == pdata->p->i)
 			pdata->l_fork = temp_fork;
-		if (temp_fork->index == pdata->philo->index + 1)
+		if (temp_fork->index == pdata->p->i + 1)
 			pdata->r_fork = temp_fork;
 		temp_fork = temp_fork->next;
 	}
@@ -69,15 +69,15 @@ static void	ft_wake_philo(t_data *data)
 	t_philo		*temp_philo;
 	t_p_data	*p_data;
 
-	data->stat->start_time = ft_date();
+	data->stat->s = ft_date();
 	temp_philo = data->philo;
 	while (temp_philo)
 	{
 		p_data = malloc(sizeof(t_p_data));
 		memset(p_data, 0, sizeof(t_p_data));
-		p_data->stat = data->stat;
-		p_data->philo = temp_philo;
-		p_data->philo->last_meal = p_data->stat->start_time;
+		p_data->s = data->stat;
+		p_data->p = temp_philo;
+		p_data->p->last_meal = p_data->s->s;
 		ft_select_forks(data, p_data);
 		pthread_create(&temp_philo->thread, NULL, ft_philosopher, p_data);
 		temp_philo = temp_philo->next;
@@ -96,12 +96,12 @@ int	main(int argc, char **argv)
 	data->stat->time_die = ft_atoi(argv[2]);
 	data->stat->time_eat = ft_atoi(argv[3]);
 	data->stat->time_sleep = ft_atoi(argv[4]);
-	data->stat->start_time = ft_date();
+	data->stat->s = ft_date();
 	data->stat->dead = false;
 	if (argc == 6)
-		data->stat->must_eat = ft_atoi(argv[5]);
+		data->stat->m = ft_atoi(argv[5]);
 	else
-		data->stat->must_eat = -1;
+		data->stat->m = -1;
 	data->philo = ft_create_philo_list(data->stat->number_philo);
 	data->fork = ft_create_fork_list(data->stat->number_philo);
 	ft_wake_philo(data);

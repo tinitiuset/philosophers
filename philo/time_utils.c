@@ -20,7 +20,7 @@ long	ft_date(void)
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
 
-long	ft_date_diff(long date)
+long	ft_dd(long date)
 {
 	return (ft_date() - date);
 }

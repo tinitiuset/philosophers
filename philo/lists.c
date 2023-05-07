@@ -20,14 +20,14 @@ t_philo	*ft_create_philo_list(int num)
 
 	i = 1;
 	head = malloc(sizeof(t_philo));
-	head->index = i;
+	head->i = i;
 	head->next = NULL;
 	tmp = head;
 	while (++i <= num)
 	{
 		tmp->next = malloc(sizeof(t_philo));
 		tmp = tmp->next;
-		tmp->index = i;
+		tmp->i = i;
 		tmp->next = NULL;
 	}
 	return (head);
