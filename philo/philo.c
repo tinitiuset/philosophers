@@ -6,111 +6,116 @@
 /*   By: mvalient <mvalient@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 15:01:51 by mvalient          #+#    #+#             */
-/*   Updated: 2023/05/07 11:24:53 by mvalient         ###   ########.fr       */
+/*   Updated: 2023/05/07 11:13:50 by mvalient         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ft_sleep(t_p_d *data)
+/*
+ * Routine will put philosopher to sleep
+ * and check if dies while sleeping
+ */
+static void	ft_sleep(t_p_data *data)
 {
-	long	s;
+	long	sleep;
 
-	if (data->s->dd)
+	if (data->s->dead)
 		return ;
 	printf("%ld Philosopher %d is sleeping\n",
-		ft_d_d(data->s->t), data->p->i);
-	s = 0;
-	while (s < data->s->s)
+		ft_dd(data->s->s), data->p->i);
+	sleep = 0;
+	while (sleep < data->s->time_sleep)
 	{
-		if (is_dead(data->p->l, ft_date(), data->s->d))
+		if (is_dead(data->p->last_meal, ft_date(), data->s->time_die))
 		{
-			if (data->s->dd)
+			if (data->s->dead)
 				return ;
-			data->s->dd = true;
+			data->s->dead = true;
 			printf("%ld Philosopher %d died\n",
-				ft_d_d(data->s->t), data->p->i);
+				ft_dd(data->s->s), data->p->i);
 			return ;
 		}
 		ft_usleep(1);
-		s++;
+		sleep++;
 	}
 }
 
-static void	get_left_fork(t_p_d *data)
+static void	get_left_fork(t_p_data *data)
 {
-	while (!is_dead(data->p->l, ft_date(), data->s->d))
+	while (!is_dead(data->p->last_meal, ft_date(), data->s->time_die))
 	{
-		if (!data->l->u)
+		if (!data->l_fork->used)
 		{
-			pthread_mutex_lock(&data->l->m);
-			data->l->u = true;
-			if (data->s->dd)
+			pthread_mutex_lock(&data->l_fork->mutex);
+			data->l_fork->used = true;
+			if (data->s->dead)
 				return ;
 			printf("%ld Philosopher %d has taken a fork\n",
-				ft_d_d(data->s->t), data->p->i);
+				ft_dd(data->s->s), data->p->i);
 			break ;
 		}
 	}
 }
 
-static void	get_right_fork(t_p_d *data)
+static void	get_right_fork(t_p_data *data)
 {
-	while (!is_dead(data->p->l, ft_date(), data->s->d))
+	while (!is_dead(data->p->last_meal, ft_date(), data->s->time_die))
 	{
-		if (!data->r->u)
+		if (!data->r_fork->used)
 		{
-			pthread_mutex_lock(&data->r->m);
-			data->r->u = true;
-			if (data->s->dd)
+			pthread_mutex_lock(&data->r_fork->mutex);
+			data->r_fork->used = true;
+			if (data->s->dead)
 				return ;
 			printf("%ld Philosopher %d has taken a fork\n",
-				ft_d_d(data->s->t), data->p->i);
+				ft_dd(data->s->s), data->p->i);
 			break ;
 		}
 	}
 }
 
-static int	ft_try_eat(t_p_d *data)
+static int	ft_try_eat(t_p_data *data)
 {
 	get_left_fork(data);
 	get_right_fork(data);
-	if (is_dead(data->p->l, ft_date(), data->s->d))
+	if (is_dead(data->p->last_meal, ft_date(), data->s->time_die))
 		return (0);
-	data->p->l = ft_date();
-	printf("%ld Philosopher %d is eating\n", ft_d_d(data->s->t), data->p->i);
-	ft_usleep(data->s->e);
-	data->l->u = false;
-	data->r->u = false;
-	pthread_mutex_unlock(&data->l->m);
-	pthread_mutex_unlock(&data->r->m);
+	data->p->last_meal = ft_date();
+	printf("%ld Philosopher %d is eating\n",
+		ft_dd(data->s->s), data->p->i);
+	ft_usleep(data->s->time_eat);
+	data->l_fork->used = false;
+	data->r_fork->used = false;
+	pthread_mutex_unlock(&data->l_fork->mutex);
+	pthread_mutex_unlock(&data->r_fork->mutex);
 	return (1);
 }
 
 void	*ft_philosopher(void *attr)
 {
-	t_p_d	*p;
-	int		e;
+	t_p_data		*p_d;
+	int				eaten;
 
-	e = 0;
-	p = (t_p_d *)attr;
-	if (p->p->i % 2 == 1)
+	eaten = 0;
+	p_d = (t_p_data *)attr;
+	if (p_d->p->i % 2 == 1)
 		ft_usleep(10);
-	while ((e < p->s->m || p->s->m == -1) && p->s->dd == false)
+	while ((eaten < p_d->s->m || p_d->s->m == -1) && p_d->s->dead == false)
 	{
-		if (ft_try_eat(p))
-			e ++;
+		if (ft_try_eat(p_d))
+			eaten ++;
 		else
 		{
-			if (!p->s->dd)
+			if (!p_d->s->dead)
 			{
-				p->s->dd = true;
-				printf("%ld Philosopher %d died\n", ft_d_d(p->s->t), p->p->i);
+				p_d->s->dead = true;
+				printf("%ld Philosopher %d died\n", ft_dd(p_d->s->s), p_d->p->i);
 			}
 		}
-		if (p->s->dd == true)
+		if (p_d->s->dead == true)
 			break ;
-		ft_sleep(p);
+		ft_sleep(p_d);
 	}
 	free(attr);
 	pthread_exit(0);
